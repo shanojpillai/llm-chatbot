@@ -6,6 +6,8 @@
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)  
 
 ---
+![image](https://github.com/user-attachments/assets/a022fa6c-e741-48c8-8651-65149a250490)
+
 
 ## **📌 Features**  
 ✅ Uses **Mistral 7B** for natural language responses via **Ollama**  
