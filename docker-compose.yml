@@ -4,12 +4,13 @@ services:
   chatbot:
     build: .
     container_name: chatbot_container
+    ports:
+      - "8000:8000"  # ✅ Expose FastAPI API
+      - "8501:8501"  # ✅ Expose Streamlit Web UI
     volumes:
-      - chatbot_data:/app
-    stdin_open: true
-    tty: true
+      - .:/app  # ✅ Ensures all files are available inside the container
+    environment:
+      - API_URL=http://localhost:8000/chat  # ✅ Fix for Streamlit inside Docker
+      - OLLAMA_HOST=http://localhost:11434  # ✅ Connects to the existing Ollama container
     command: >
-      sh -c "python setup_db.py && python chatbot.py"
-
-volumes:
-  chatbot_data:
+      sh -c "python setup_db.py && uvicorn api:app --host 0.0.0.0 --port 8000 & sleep 5 && streamlit run web_ui.py --server.port 8501 --server.address 0.0.0.0"

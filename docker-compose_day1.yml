@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  chatbot:
+    build: .
+    container_name: chatbot_container
+    volumes:
+      - chatbot_data:/app
+    stdin_open: true
+    tty: true
+    command: >
+      sh -c "python setup_db.py && python chatbot.py"
+
+volumes:
+  chatbot_data:
